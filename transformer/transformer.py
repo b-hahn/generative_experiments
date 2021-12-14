@@ -5,6 +5,7 @@ from flax import linen as nn
 from flax.core.frozen_dict import V
 import jax
 import jax.numpy as jnp
+import trax
 
 @dataclass
 class Config:
@@ -162,5 +163,10 @@ class Transformer(nn.Module):
 if __name__ == '__main__':
     cfg = Config()
     tf = Transformer(cfg)
+
+    sentence = 'It is nice to learn new things today!'
+    tokenized = list(trax.data.tokenize(iter([sentence]),  # Operates on streams.
+                                    vocab_dir='gs://trax-ml/vocabs/',
+                                    vocab_file='ende_32k.subword'))[0]
 
 
