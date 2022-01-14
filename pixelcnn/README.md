@@ -1,3 +1,5 @@
+Slightly adapted from https://github.com/google/flax/tree/main/examples/pixelcnn. 
+
 ## PixelCNN++ image modelling
 Trains a PixelCNN++ model [(Salimans et al.,
 2017)](https://arxiv.org/abs/1701.05517) for image generation on the CIFAR-10 dataset.
