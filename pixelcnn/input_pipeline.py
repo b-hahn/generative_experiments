@@ -75,12 +75,9 @@ class DataSource(object):
 class DataSourceVQVAE:
     """CIFAR10 VQVAE embeddings data source."""
 
-    TRAIN_IMAGES = 40000
-    EVAL_IMAGES = 10000
-
     def __init__(self, config: ml_collections.ConfigDict, shuffle_seed: int = 1, data_dir: Path = None):
-        data_train = np.load('/home/ben/vqvae_experiments/encodings_2021-12-02-15-22-23/encodings_train.npy')
-        data_val = np.load('/home/ben/vqvae_experiments/encodings_2021-12-02-15-22-23/encodings_val.npy')
+        data_train = np.load('/home/ben/generative_experiments/vqvae/encodings_2022-02-01-11-09-48/encodings_train_swisstopo.npy')
+        data_val = np.load('/home/ben/generative_experiments/vqvae/encodings_2022-02-01-11-09-48/encodings_val_swisstopo_0.npy')
         self.train_ds_len = data_train.shape[0]
 
         def process_sample(x):
@@ -96,9 +93,6 @@ class DataSourceVQVAE:
                       .batch(config.batch_size, drop_remainder=True)
                       .prefetch(10))
 
-        # train_ds = train_ds.map(process_sample, num_parallel_calls=128)
-        train_ds = train_ds.batch(config.batch_size, drop_remainder=True)
-        train_ds = train_ds.prefetch(10)
         self.train_ds = train_ds
 
         # Test set
