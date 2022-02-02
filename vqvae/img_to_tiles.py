@@ -6,7 +6,7 @@ from PIL import Image
 import rasterio
 from tqdm import tqdm
 
-fp = Path('/Users/ben/Downloads/swiss-map-raster25_2015_1328_krel_1.25_2056.tif')
+fp = Path('/home/ben/swiss-map-raster25_2015_1328_krel_1.25_2056.tif')
 TILE_WIDTH = 128
 TILE_HEIGHT = 128
 

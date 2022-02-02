@@ -69,8 +69,8 @@ class Trainer:
         model = VQVAEModel(encoder, decoder, vq_vae, pre_vq_conv1,
                         data_variance=self.train_data_variance)
 
-        return model(data['image'], is_training)
-        # return model(data, is_training)
+        # return model(data['image'], is_training)
+        return model(data, is_training)
 
 
 
@@ -115,17 +115,15 @@ class Trainer:
 
         rng = jax.random.PRNGKey(42)
         train_dataset_iter = iter(train_dataset)
-        # params, state = self.forward.init(rng, jnp.asarray(next(train_dataset_iter)), is_training=True)
-        params, state = self.forward.init(rng, next(train_dataset_iter), is_training=True)
+        params, state = self.forward.init(rng, jnp.asarray(next(train_dataset_iter)), is_training=True)
+        # params, state = self.forward.init(rng, next(train_dataset_iter), is_training=True)
 
         opt_state = self.optimizer.init(params)
 
         for step in range(1, self.cfg.num_training_updates + 1):
-            # data = jnp.asarray(next(train_dataset_iter))
-            train_batch = next(train_dataset_iter)
+            train_batch = jnp.asarray(next(train_dataset_iter))
+            # train_batch = next(train_dataset_iter)
             params, state, opt_state, train_results = (
-                self.train_step(params, state, opt_state, train_batch))
-
             train_results = jax.device_get(train_results)
             train_losses.append(train_results['loss'])
             train_recon_errors.append(train_results['recon_error'])
@@ -138,7 +136,7 @@ class Trainer:
                     ('recon_error: %.3f ' % np.mean(train_recon_errors[-100:])) +
                     ('perplexity: %.3f ' % np.mean(train_perplexities[-100:])) +
                     ('vqvae loss: %.3f' % np.mean(train_vqvae_loss[-100:])))
-            if step % 500 == 0:
+            if step % 1000 == 0:
                 # Put data through the model with is_training=False, so that in the case of
                 # using EMA the codebook is not updated.
                 # train_reconstructions = self.forward.apply(params, state, rng, data, is_training=False)[0]['x_recon']

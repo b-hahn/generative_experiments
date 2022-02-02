@@ -3,7 +3,7 @@ from dataclasses import dataclass
 @dataclass
 class Config:
     # Set hyper-parameters.
-    batch_size: int = 32
+    batch_size: int = 8
     image_size: int = 32
 
     # 100k steps should take < 30 minutes on a modern (>= 2017) GPU.
@@ -44,4 +44,6 @@ class Config:
     learning_rate: float = 3e-4
 
     save_path = "weights"
+
+    dataset: str ='swisstopo'
 

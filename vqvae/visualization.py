@@ -15,7 +15,7 @@ def visualize_reconstructions(train_batch, train_reconstructions, valid_batch, v
         ax.yaxis.set_major_locator(loc)
         ax.grid(which='major', axis='both', linestyle='-')
 
-    train_batch = train_batch['image']
+    # train_batch = train_batch['image']
     # img_w, img_h = train_batch['image'].shape[1], train_batch['image'].shape[2]
     img_w, img_h = train_batch.shape[1], train_batch.shape[2]
     f = plt.figure(figsize=(16, 8))

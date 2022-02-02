@@ -1,6 +1,6 @@
 import haiku as hk
 import jax
-from jax.interpreters.batching import batch, batch_subtrace
+# from jax.interpreters.batching import batch, batch_subtrace
 import jax.numpy as jnp
 
 

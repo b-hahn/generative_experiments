@@ -23,7 +23,7 @@ def get_swisstopo_dataset(split: str, img_w: int, img_h: int) -> jnp.ndarray:
     # dataset_it = dataset.as_numpy_iterator()
     # jax.tree_map(lambda x: f'{x.dtype.name}{list(x.shape)}', dataset_it)
     # return jax.tree_map(lambda x: x[:100], dataset_it)
-    data_dir = Path("/home/ben/vqvae_experiments/tiles/xs/")
+    data_dir = Path("/home/ben/generative_experiments/vqvae/tiles/xs/")
     batch_size = 32
 
     if split == 'train':
